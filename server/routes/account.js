@@ -1,7 +1,5 @@
 const path = require('path')
 const express = require('express')
-const session = require('express-session')
-const bodyParser = require('body-parser')
 const { User } = require('../models')
 
 const app = express()
@@ -9,14 +7,6 @@ const app = express()
 app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'pug')
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.use(session({
-  secret: 'oauth2-example',
-  resave: false,
-  saveUninitialized: true
-}))
 
 app.get('/', (req, res) => {
   if (!req.session.currentUser) {

@@ -1,5 +1,7 @@
 const path = require('path')
 const express = require('express')
+const session = require('express-session')
+const bodyParser = require('body-parser')
 const createError = require('http-errors')
 const Youch = require('youch')
 
@@ -10,6 +12,15 @@ const oauth = require('./routes/oauth')
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(session({
+  secret: 'oauth2-example',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use('/users', users)
 app.use('/account', account)

@@ -12,7 +12,7 @@ User.insert([
     nickname: 'Administrator',
     email: 'admin@zce.me',
     mobile: '13266668888',
-    status: ''
+    status: 'activated'
   },
   {
     slug: 'zce',
@@ -21,7 +21,7 @@ User.insert([
     nickname: 'Wang Lei',
     email: 'w@zce.me',
     mobile: '13266668888',
-    status: ''
+    status: 'activated'
   }
 ])
 
