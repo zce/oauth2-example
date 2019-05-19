@@ -1,0 +1,22 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title Sign in &middot; OAuth2 Example
+  // Bootstrap core CSS
+  link(href='/css/bootstrap.css', rel='stylesheet')
+  // Custom styles for this template
+  link(href='/css/login.css', rel='stylesheet')
+form.form-login(action='session', method='post')
+  img.d-block.mb-5.mx-auto(src='https://img.zce.me/logo.svg', alt='zce.me', width='120', height='120')
+  h1.h3.mb-3.font-weight-light Please sign in
+  label.sr-only(for='input_username') Username
+  input#input_username.form-control(type='text', name='username', value= model.username, placeholder='Username', required, autofocus)
+  label.sr-only(for='input_password') Password
+  input#input_password.form-control(type='password', name='password', value= model.password, placeholder='Password', required)
+  label.checkbox.mb-4
+    input(type='checkbox', name='remember', value='true')
+    |  Remember me
+  if error
+    p.text-danger ⌽ #{error}
+  button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in

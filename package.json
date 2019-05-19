@@ -1,0 +1,38 @@
+{
+  "name": "oauth2-example",
+  "version": "0.1.0",
+  "description": "oauth2 server & client example",
+  "homepage": "https://github.com/zce/oauth2-example#readme",
+  "bugs": {
+    "url": "https://github.com/zce/oauth2-example/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zce/oauth2-example.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "zce",
+    "email": "w@zce.me",
+    "url": "https://zce.me"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0",
+    "express-session": "^1.16.1",
+    "http-errors": "^1.7.2",
+    "lokijs": "^1.5.6",
+    "oauth2-server": "^3.0.1",
+    "pug": "^2.0.3",
+    "youch": "^2.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0",
+    "standard": "^12.0.1"
+  }
+}
