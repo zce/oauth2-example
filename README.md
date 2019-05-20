@@ -2,7 +2,7 @@
 
 ### User
 
-- 
+-
 
 ### Client
 
@@ -12,10 +12,29 @@
 
 ### AuthorizationCode
 
-https://github.com/YardStrong/express-oauth-demo
+## References
+
 https://blog.csdn.net/shinepan/article/details/78851886
-https://github.com/RobottDog/DCOS-Auth
+https://github.com/YardStrong/express-oauth-demo
+
 https://www.jianshu.com/p/7febbe553c83
+https://github.com/RobottDog/DCOS-Auth
+
+https://github.com/syntithenai/react-express-oauth-login-system
+
+https://github.com/manjeshpv/node-oauth2-server-implementation
+
+https://github.com/oauth-xx/oauth2
+
+https://tools.ietf.org/html/rfc6749
+
+https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/
+
+https://github.com/greenspanx/node_oauth2_rest_api/blob/master/server.js
+
+https://github.com/zhanghengxin/test-oauth2/blob/master/oauth-model/model.js
+
+https://github.com/slavab89/oauth2-server-example-mongodb
 
 请求授权
 
