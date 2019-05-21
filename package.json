@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bson-objectid": "^1.2.5",
     "express": "^4.17.0",
     "express-session": "^1.16.1",
     "http-errors": "^1.7.2",

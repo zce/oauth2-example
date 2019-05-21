@@ -318,6 +318,11 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+bson-objectid@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.npm.taobao.org/bson-objectid/download/bson-objectid-1.2.5.tgz#622c0c9d40c02aece5ac5b61a70248ec303047f0"
+  integrity sha1-YiwMnUDAKuzlrFthpwJI7DAwR/A=
+
 bytes@3.1.0:
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/bytes/download/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"

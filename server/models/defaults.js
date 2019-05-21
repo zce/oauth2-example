@@ -1,6 +1,8 @@
+const objectId = require("bson-objectid")
+
 exports.clients = [
   {
-    id: 1,
+    id: objectId().str,
     name: 'OAuth2 Client',
     website_url: 'https://github.com/zce/oauth2-example',
     privacy_url: 'https://github.com/zce/oauth2-example',
@@ -15,7 +17,7 @@ exports.clients = [
 
 exports.authorization_codes = [
   {
-    id: 1,
+    id: objectId().str,
     code: '4023348b5bc4',
     expires: new Date('2019-05-30 00:00'),
     redirect_uri: 'http://localhost:4000/login/callback',
@@ -27,7 +29,7 @@ exports.authorization_codes = [
 
 exports.access_tokens = [
   {
-    id: 1,
+    id: objectId().str,
     token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94',
     expires: new Date('2019-05-30 00:00'),
     scope: 'posts:read',
@@ -38,7 +40,7 @@ exports.access_tokens = [
 
 exports.refresh_tokens = [
   {
-    id: 1,
+    id: objectId().str,
     token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2',
     expires: new Date('2019-05-30 00:00'),
     scope: 'posts:read',
@@ -49,22 +51,22 @@ exports.refresh_tokens = [
 
 exports.scopes = [
   {
-    id: 1,
+    id: objectId().str,
     scope: 'posts:read',
     id_default: true
   },
   {
-    id: 2,
+    id: objectId().str,
     scope: 'posts:create',
     id_default: false
   },
   {
-    id: 3,
+    id: objectId().str,
     scope: 'posts:delete',
     id_default: false
   },
   {
-    id: 4,
+    id: objectId().str,
     scope: 'posts:update',
     id_default: false
   }
@@ -72,7 +74,7 @@ exports.scopes = [
 
 exports.users = [
   {
-    id: 1,
+    id: objectId().str,
     slug: 'admin',
     username: 'admin',
     password: 'wanglei',
@@ -83,7 +85,7 @@ exports.users = [
     scope: ''
   },
   {
-    id: 2,
+    id: objectId().str,
     slug: 'zce',
     username: 'zce',
     password: 'wanglei',
@@ -97,14 +99,14 @@ exports.users = [
 
 exports.posts = [
   {
-    id: 1,
+    id: objectId().str,
     slug: 'hello-world',
     title: 'Hello world',
     excerpt: '欢迎使用WordPress。这是您的第一篇文章。编辑或删除它，然后开始写作吧！',
     content: '<p>欢迎使用WordPress。这是您的第一篇文章。编辑或删除它，然后开始写作吧！</p>'
   },
   {
-    id: 2,
+    id: objectId().str,
     slug: 'welcome-to-ghost',
     title: 'Welcome to Ghost',
     excerpt: '👋 Welcome, it\'s great to have you here.',

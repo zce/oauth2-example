@@ -1,14 +1,14 @@
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
-// const lodashId = require('lodash-id')
+const objectId = require('./object-id')
 
 const defaults = require('./defaults')
 
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
-// // extend
-// db._.mixin(lodashId)
+// extend
+db._.mixin(objectId)
 
 // set defaults
 db.defaults(defaults).write()
