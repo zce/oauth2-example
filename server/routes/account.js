@@ -32,7 +32,6 @@ router.post('/login', (req, res) => {
 
   // ## 2. 持久化
   const user = users.find({ username }).value()
-  console.log(user)
 
   // ## 3. 客户端响应
   if (!user) {
