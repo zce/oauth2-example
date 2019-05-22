@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Server &laquo; Dashboard</title>
+  <title>Client &laquo; OAuth2</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="https://unpkg.com/normalize.css">
   <link rel="stylesheet" href="https://unpkg.com/milligram">
@@ -14,7 +14,10 @@
     }
 
     .site-main > section {
-      margin-top: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 75vh;
     }
 
     .site-footer {
@@ -27,17 +30,18 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <h1>Dashboard Server</h1>
+      <h1>OAuth2 Client</h1>
     </div>
   </header>
 
   <main class="site-main">
-
+    <section class="container">
+      <a href="http://localhost:3000/oauth/authorize?client_id=oauth2-example-client&redirect_uri=http://localhost:4000/login/callback&response_type=code&scope=posts:read" class="button">Login</a>
+    </section>
   </main>
 
   <footer class="site-footer">
     <p class="container">
-      This service is based on <a href="https://github.com/typicode/json-server">JSON Server</a>.
       <a href="https://github.com/zce/dashboard-server">&lt;/&gt;</a> with <span class="heart">&hearts;</span> by <a href="https://zce.me">zce</a>.
       Licensed under the <a href="https://github.com/zce/dashboard-server/blob/master/LICENSE">MIT License</a>.
     </p>

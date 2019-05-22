@@ -20,7 +20,7 @@
   "scripts": {
     "lint": "standard",
     "start:server": "nodemon server",
-    "start:client": "serve client",
+    "start:client": "nodemon client",
     "start": "concurrently \"yarn start:server\" \"yarn start:client\""
   },
   "dependencies": {

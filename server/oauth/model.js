@@ -41,6 +41,7 @@ module.exports = class Model {
     callback(null, code)
   }
 
+  // https://oauth2-server.readthedocs.io/en/latest/model/spec.html#getclient-clientid-clientsecret-callback
   getClient (clientId, clientSecret, callback) {
     console.log('getClient', arguments)
 
@@ -50,7 +51,11 @@ module.exports = class Model {
     }
     const client = clients.find(query).value()
 
-    callback(null, client)
+    callback(null, {
+      id: client.id,
+      redirectUris: client.redirects,
+      grants: client.grants
+    })
   }
 
   getUser (username, password, callback) {

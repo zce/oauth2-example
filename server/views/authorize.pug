@@ -7,11 +7,13 @@ head
   link(href='/css/bootstrap.css', rel='stylesheet')
   // Custom styles for this template
   link(href='/css/login.css', rel='stylesheet')
-form.form-login(action='session', method='post')
+form.form-authorize(method='post')
   img.d-block.mb-5.mx-auto(src='https://img.zce.me/logo.svg', alt='zce.me', width='120', height='120')
-  h1.h3.mb-3.font-weight-light Request authorize
+  h1.h3.mb-3.font-weight-light Authorized to #{client_name}
+  ul.text-warning
+    li= scope
   input(type='hidden', name='allow', value='true')
   input(type='hidden', name='client_id', value=client_id)
   input(type='hidden', name='redirect_uri', value=redirect_uri)
-  input(type='hidden', name='response_type', value='code')
+  input(type='hidden', name='response_type', value=response_type)
   button.btn.btn-lg.btn-primary.btn-block(type='submit') Authorize

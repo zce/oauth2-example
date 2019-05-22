@@ -12,11 +12,20 @@ router.get('/authorize', (req, res) => {
     return res.redirect(`/account/login?redirect=${escape(req.originalUrl)}`)
   }
 
-  const { client_id, redirect_uri } = req.query
-  res.render('authorize', { client_id, redirect_uri })
+  oauth.model.getClient(req.query.client_id, null, (err, client) => {
+    if (err) throw err
+    res.render('authorize', {
+      client_name: client.name,
+      client_id: client.key,
+      scope: req.query.scope,
+      redirect_uri: req.query.redirect_uri,
+      response_type: req.query.response_type,
+    })
+  })
 })
 
 router.post('/authorize', oauth.authorize())
+
 router.all('/token', oauth.token())
 
 router.authenticate = oauth.authenticate

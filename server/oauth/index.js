@@ -12,6 +12,8 @@ module.exports = class OAuth {
       options.model = new Model()
     }
 
+    this.model = options.model
+
     this.useErrorHandler = !!options.useErrorHandler
     delete options.useErrorHandler
 
@@ -76,6 +78,7 @@ module.exports = class OAuth {
 
       return this.server.authorize(request, response, options)
         .then(code => {
+          console.log(code)
           res.locals.oauth = { code: code }
           this.continueMiddleware && next()
         })
@@ -83,6 +86,7 @@ module.exports = class OAuth {
           return this.handleResponse(req, res, response)
         })
         .catch(e => {
+          console.log(e)
           return this.handleError(e, req, res, response, next)
         })
     }

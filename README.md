@@ -67,11 +67,16 @@ client_id: 1,
 授权站点：AuthApp
 
 1. 用户在 FooApp 上点击 AuthApp 授权登录链接，例如：
-  - http://localhost:3000/oauth/authorize?response_type=code&client_id=oauth2-example-client&redirect_uri=http://localhost:4000/login/callback&scope=posts:read
+  - http://localhost:3000/oauth/authorize?client_id=oauth2-example-client&redirect_uri=http://localhost:4000/login/callback&response_type=code&scope=posts:read
 2. 用户进入 AuthApp 页面进行授权，如果当前用户还没有在 AuthApp 登录，则需要先跳转到 AuthApp 登录
-  -
+  - http://localhost:3000/account/login?redirect=%2Foauth%2Fauthorize%3Fclient_id%3Doauth2-example-client%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A4000%2Flogin%2Fcallback%26response_type%3Dcode%26scope%3Dposts%3Aread
+
 
 ## References
+
+https://github.com/FrankHassanabad/Oauth2orizeRecipes
+
+https://github.com/primo-malvado/calafrio
 
 https://blog.csdn.net/shinepan/article/details/78851886
 https://github.com/YardStrong/express-oauth-demo
