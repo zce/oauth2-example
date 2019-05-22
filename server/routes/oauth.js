@@ -1,30 +1,24 @@
-const express = require('express')
-const bodyParser = require('body-parser')
+const { escape } = require('querystring')
+const { Router } = require('express')
 
 const OAuth = require('../oauth')
 
 const oauth = new OAuth()
 
-const app = express()
+const router = Router()
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.get('/authorize', (req, res) => {
-  const { client_id, redirect_uri } = req.query
+router.get('/authorize', (req, res) => {
   if (!req.session.currentUser) {
-    return res.redirect(`/account/login?redirect=${req.url}&client_id=${client_id}&redirect_uri=${redirect_uri}`)
+    return res.redirect(`/account/login?redirect=${escape(req.originalUrl)}`)
   }
 
-  res.render('authorize', {
-    client_id: req.query.client_id,
-    redirect_uri: req.query.redirect_uri
-  })
+  const { client_id, redirect_uri } = req.query
+  res.render('authorize', { client_id, redirect_uri })
 })
 
-app.post('/authorize', oauth.authorize())
-app.all('/token', oauth.token())
+router.post('/authorize', oauth.authorize())
+router.all('/token', oauth.token())
 
-app.authenticate = oauth.authenticate
+router.authenticate = oauth.authenticate
 
-module.exports = app
+module.exports = router

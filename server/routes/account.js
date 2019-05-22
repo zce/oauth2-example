@@ -1,14 +1,9 @@
-const path = require('path')
-const express = require('express')
-const { User } = require('../models')
+const { Router } = require('express')
+const { users } = require('../models')
 
-const app = express()
+const router = Router()
 
-app.set('views', path.join(__dirname, '../views'))
-app.set('view engine', 'pug')
-
-
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   if (!req.session.currentUser) {
     return res.redirect('/account/login')
   }
@@ -18,16 +13,12 @@ app.get('/', (req, res) => {
   )
 })
 
-app.get('/login', (req, res) => {
+router.get('/login', (req, res) => {
   res.locals.model = { username: '', password: '' }
   res.render('login')
 })
 
-app.get('/session', (req, res) => {
-  res.redirect('/account/login')
-})
-
-app.post('/session', (req, res) => {
+router.post('/login', (req, res) => {
   // ## 0. 接收表单
   const { username, password } = req.body
 
@@ -40,7 +31,8 @@ app.post('/session', (req, res) => {
   }
 
   // ## 2. 持久化
-  const user = User.findOne({ username })
+  const user = users.find({ username }).value()
+  console.log(user)
 
   // ## 3. 客户端响应
   if (!user) {
@@ -62,11 +54,11 @@ app.post('/session', (req, res) => {
 /**
  * GET /account/logout
  */
-app.get('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   // ## 1. 删除session中当前登录用户
   delete req.session.currentUser
   // ## 2. 跳转到登录页
   res.redirect('/account/login')
 })
 
-module.exports = app
+module.exports = router

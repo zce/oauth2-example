@@ -1,6 +1,6 @@
 // https://oauth2-server.readthedocs.io/en/latest/model/spec.html
 
-const { Client, AccessToken, RefreshToken, AuthorizationCode, User } = require('../models')
+const { clients, authorizationCodes, accessTokens, refreshTokens, scopes, users } = require('../models')
 
 module.exports = class Model {
   constructor () { }
@@ -14,10 +14,9 @@ module.exports = class Model {
   getAccessToken (accessToken, callback) {
     console.log('getAccessToken', arguments)
 
-    const token = AccessToken.findOne({ accessToken })
-    token.user = User.get(token.user_id)
-    token.client = Client.get(token.client_id)
-    token.id = token.$loki
+    const token = accessTokens.find({ token: accessToken }).value()
+    token.user = users.getById(token.user_id)
+    token.client = clients.getById(token.client_id)
 
     callback(null, token)
   }
@@ -25,10 +24,9 @@ module.exports = class Model {
   getRefreshToken (refreshToken, callback) {
     console.log('getRefreshToken', arguments)
 
-    const token = RefreshToken.findOne({ refreshToken })
-    token.user = User.get(token.user_id)
-    token.client = Client.get(token.client_id)
-    token.id = token.$loki
+    const token = refreshTokens.find({ token: refreshToken }).value()
+    token.user = users.getById(token.user_id)
+    token.client = clients.getById(token.client_id)
 
     callback(null, token)
   }
@@ -36,8 +34,9 @@ module.exports = class Model {
   getAuthorizationCode (authorizationCode, callback) {
     console.log('getAuthorizationCode', arguments)
 
-    const code = AuthorizationCode.findOne({ authorizationCode })
-    code.id = code.$loki
+    const code = authorizationCodes.find({ code: authorizationCode }).value()
+    code.user = users.getById(code.user_id)
+    code.client = clients.getById(code.client_id)
 
     callback(null, code)
   }
@@ -45,12 +44,11 @@ module.exports = class Model {
   getClient (clientId, clientSecret, callback) {
     console.log('getClient', arguments)
 
-    const query = { clientId }
+    const query = { key: clientId }
     if (clientSecret) {
-      query.clientSecret = clientSecret
+      query.secret = clientSecret
     }
-    const client = Client.findOne(query)
-    client.id = client.$loki
+    const client = clients.find(query).value()
 
     callback(null, client)
   }
@@ -58,8 +56,7 @@ module.exports = class Model {
   getUser (username, password, callback) {
     console.log('getUser', arguments)
 
-    const user = User.findOne({ username, password })
-    user.id = user.$loki
+    const user = users.find({ username, password }).value()
 
     callback(null, user)
   }
@@ -67,8 +64,7 @@ module.exports = class Model {
   getUserFromClient (client, callback) {
     console.log('getUserFromClient', arguments)
 
-    const user = User.get(client.id)
-    user.id = user.$loki
+    const user = users.getById(client.user_id)
 
     callback(null, user)
   }
@@ -76,43 +72,57 @@ module.exports = class Model {
   saveToken (token, client, user, callback) {
     console.log('saveToken', arguments)
 
-    AccessToken.push({
-      accessToken: token.accessToken,
+    accessTokens.push({
+      token: token.accessToken,
       expires: token.accessTokenExpiresAt,
-      clientId: client.id,
-      userId: user.id,
-      scope: token.scope
-    })
+      scope: token.scope,
+      user_id: user.id,
+      client_id: client.id
+    }).write()
+    if (token.refreshToken) {
+      refreshTokens.push({
+        token: token.refreshToken,
+        expires: token.refreshTokenExpiresAt,
+        scope: token.scope,
+        user_id: user.id,
+        client_id: client.id
+      }).write()
+    }
 
-
-    callback()
+    callback(Object.assign(token, { client, user }))
   }
 
   saveAuthorizationCode (code, client, user, callback) {
     console.log('saveAuthorizationCode', arguments)
 
-    AuthorizationCode.insert({
-      expires: code.expires,
-      code: code.code,
+    authorizationCodes.push({
+      code: code.authorizationCode,
+      expires: code.expiresAt,
       scope: code.scope,
-      client_id: client.id,
-      user_id: user.id
+      user_id: user.id,
+      client_id: client.id
+    }).write()
+
+    callback(null, {
+      authorization_code: code.authorizationCode,
+      expires_in: Math.floor((code.expiresAt - new Date()) / 1000)
     })
-    callback(new Error('not impl'))
   }
 
   revokeToken (token, callback) {
     console.log('revokeToken', arguments)
 
-    const removed = RefreshToken.findAndRemove({ refreshToken: token.refreshToken })
-    callback(null, !!removed)
+    refreshTokens.remove({ token: token.refreshToken }).write()
+
+    callback(null, true)
   }
 
   revokeAuthorizationCode (code, callback) {
     console.log('revokeAuthorizationCode', arguments)
 
-    const removed = AuthorizationCode.findAndRemove({ authorizationCode: code.authorizationCode })
-    callback(null, !!removed)
+    authorizationCodes.remove({ code: code.authorizationCode }).write()
+
+    callback(null, true)
   }
 
   validateScope (user, client, scope, callback) {

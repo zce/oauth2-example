@@ -1,11 +1,15 @@
 const low = require('lowdb')
+const Memory = require('lowdb/adapters/Memory')
 const FileSync = require('lowdb/adapters/FileSync')
 const objectId = require('./object-id')
 
 const defaults = require('./defaults')
 
-const adapter = new FileSync('db.json')
-const db = low(adapter)
+const adapters = {
+  memory: new Memory(),
+  filesync: new FileSync('db.json')
+}
+const db = low(adapters.memory)
 
 // extend
 db._.mixin(objectId)
@@ -15,9 +19,9 @@ db.defaults(defaults).write()
 
 // export collections
 exports.clients = db.get('clients')
-exports.authorization_codes = db.get('authorization_codes')
-exports.access_tokens = db.get('access_tokens')
-exports.refresh_tokens = db.get('refresh_tokens')
+exports.authorizationCodes = db.get('authorization_codes')
+exports.accessTokens = db.get('access_tokens')
+exports.refreshTokens = db.get('refresh_tokens')
 exports.scopes = db.get('scopes')
 exports.users = db.get('users')
 exports.posts = db.get('posts')

@@ -6,9 +6,9 @@ exports.clients = [
     name: 'OAuth2 Client',
     website_url: 'https://github.com/zce/oauth2-example',
     privacy_url: 'https://github.com/zce/oauth2-example',
-    client_id: 'oauth2-client',
-    client_secret: 'f657d916-0ad9-4b65-9976-3fe796bbdea0',
-    redirect_uris: ['http://localhost:4000/login/callback'],
+    key: 'oauth2-example-client', // client_id
+    secret: 'f657d916-0ad9-4b65-9976-3fe796bbdea0', // client_secret
+    redirects: ['http://localhost:4000/login/callback'], // redirect_uris
     grants: ['authorization_code', 'password', 'refresh_token', 'client_credentials'],
     scope: 'all',
     user_id: 1
@@ -18,9 +18,9 @@ exports.clients = [
 exports.authorization_codes = [
   {
     id: objectId().str,
-    code: '4023348b5bc4',
-    expires: new Date('2019-05-30 00:00'),
-    redirect_uri: 'http://localhost:4000/login/callback',
+    code: '4023348b5bc4', // authorization_code
+    expires: new Date('2019-05-30 00:00'), // expires_at
+    redirect: 'http://localhost:4000/login/callback', // redirect_uri
     scope: 'posts:read',
     user_id: 1,
     client_id: 1,
@@ -30,8 +30,8 @@ exports.authorization_codes = [
 exports.access_tokens = [
   {
     id: objectId().str,
-    token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94',
-    expires: new Date('2019-05-30 00:00'),
+    token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94', // access_token
+    expires: new Date('2019-05-30 00:00'), // expires_at
     scope: 'posts:read',
     user_id: 1,
     client_id: 1,
@@ -41,8 +41,8 @@ exports.access_tokens = [
 exports.refresh_tokens = [
   {
     id: objectId().str,
-    token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2',
-    expires: new Date('2019-05-30 00:00'),
+    token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2', // refresh_token
+    expires: new Date('2019-05-30 00:00'), // expires_at
     scope: 'posts:read',
     user_id: 1,
     client_id: 1,
@@ -53,22 +53,22 @@ exports.scopes = [
   {
     id: objectId().str,
     scope: 'posts:read',
-    id_default: true
+    default: true
   },
   {
     id: objectId().str,
     scope: 'posts:create',
-    id_default: false
+    default: false
   },
   {
     id: objectId().str,
     scope: 'posts:delete',
-    id_default: false
+    default: false
   },
   {
     id: objectId().str,
     scope: 'posts:update',
-    id_default: false
+    default: false
   }
 ]
 

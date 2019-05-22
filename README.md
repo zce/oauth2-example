@@ -2,15 +2,74 @@
 
 ### User
 
--
+id: objectId().str,
+slug: 'admin',
+username: 'admin',
+password: 'wanglei',
+nickname: 'Administrator',
+email: 'admin@zce.me',
+mobile: '13266668888',
+status: 'activated',
+scope: ''
+
+### Scope
+
+id: objectId().str,
+scope: 'posts:update',
+default: false
 
 ### Client
 
+id: objectId().str,
+name: 'OAuth2 Client',
+website_url: 'https://github.com/zce/oauth2-example',
+privacy_url: 'https://github.com/zce/oauth2-example',
+key: 'oauth2-client', // client_id
+secret: 'f657d916-0ad9-4b65-9976-3fe796bbdea0', // client_secret
+redirects: ['http://localhost:4000/login/callback'], // redirect_uris
+grants: ['authorization_code', 'password', 'refresh_token', 'client_credentials'],
+scope: 'all',
+user_id: 1
+
 ### AccessToken
+
+id: objectId().str,
+token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94', // access_token
+expires: new Date('2019-05-30 00:00'), // expires_at
+scope: 'posts:read',
+user_id: 1,
+client_id: 1,
 
 ### RefreshToken
 
+id: objectId().str,
+token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2', // refresh_token
+expires: new Date('2019-05-30 00:00'), // expires_at
+scope: 'posts:read',
+user_id: 1,
+client_id: 1,
+
 ### AuthorizationCode
+
+id: objectId().str,
+code: '4023348b5bc4', // authorization_code
+expires: new Date('2019-05-30 00:00'), // expires_at
+redirect: 'http://localhost:4000/login/callback', // redirect_uri
+scope: 'posts:read',
+user_id: 1,
+client_id: 1,
+
+## Grant Types
+
+### Authorization Code
+
+应用站点：FooApp
+授权站点：AuthApp
+
+1. 用户在 FooApp 上点击 AuthApp 授权登录链接，例如：
+  - http://localhost:3000/oauth/authorize?response_type=code&client_id=oauth2-example-client&redirect_uri=http://localhost:4000/login/callback&scope=posts:read
+2. 用户进入 AuthApp 页面进行授权，如果当前用户还没有在 AuthApp 登录，则需要先跳转到 AuthApp 登录
+  -
 
 ## References
 
