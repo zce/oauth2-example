@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const createError = require('http-errors')
 const Youch = require('youch')
 
-const users = require('./routes/users')
+const posts = require('./routes/posts')
 const account = require('./routes/account')
 const oauth = require('./routes/oauth')
 
@@ -25,7 +25,7 @@ app.use(session({
   saveUninitialized: true
 }))
 
-app.use('/users', users)
+app.use('/posts', posts)
 app.use('/account', account)
 app.use('/oauth', oauth)
 
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-  console.error(err)
+  // console.error(err)
   new Youch(err, req).toHTML().then(html => res.send(html))
 })
 

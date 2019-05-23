@@ -1,0 +1,45 @@
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Client « OAuth2
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic')
+    link(rel='stylesheet', href='https://unpkg.com/normalize.css')
+    link(rel='stylesheet', href='https://unpkg.com/milligram')
+    style.
+      .site-header {
+      padding-top: 2.0rem;
+      border-bottom: 1px solid #eee;
+      }
+      .site-main > section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 480px;
+      height: 75vh;
+      }
+      .site-footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid #eee;
+      }
+  body
+    header.site-header
+      .container
+        h1 OAuth2 Client
+    main.site-main
+      section.container
+        a#btn_login.button(href='javascript:;') OAuth2 Login
+    script.
+      const btnLogin = document.querySelector('#btn_login')
+      btnLogin.addEventListener('click', () => {
+        const query = new URLSearchParams({
+          client_id: 'oauth2-example-client',
+          redirect_uri: '#{oauth2.callback_uri}',
+          response_type: 'code',
+          scope: 'posts:read',
+          state: '#{state}'
+        })
+        const url = `#{oauth2.authorize_uri}?${query}`
+        window.open(url, 'oauth2-authorize')
+      })

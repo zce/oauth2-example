@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-  res.locals.model = { username: '', password: '' }
+  res.locals.model = { username: 'zce', password: 'wanglei' }
   res.render('login')
 })
 

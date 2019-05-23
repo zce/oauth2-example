@@ -19,18 +19,19 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "start:server": "nodemon server",
-    "start:client": "nodemon client",
+    "start:server": "nodemon server --watch server",
+    "start:client": "nodemon client --watch client",
     "start": "concurrently \"yarn start:server\" \"yarn start:client\""
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.19.0",
     "bson-objectid": "^1.2.5",
     "express": "^4.17.0",
     "express-session": "^1.16.1",
     "http-errors": "^1.7.2",
     "lowdb": "^1.0.0",
-    "oauth2-server": "^3.0.1",
+    "oauth2-server": "^4.0.0-dev.2",
     "pug": "^2.0.3",
     "youch": "^2.0.10"
   },

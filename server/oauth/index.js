@@ -1,3 +1,4 @@
+const { escape } = require('querystring')
 const OAuthServer = require('oauth2-server')
 // const AccessDeniedError = require('oauth2-server/lib/errors/access-denied-error')
 // const InvalidArgumentError = require('oauth2-server/lib/errors/invalid-argument-error')
@@ -6,7 +7,7 @@ const Model = require('./model')
 
 const { Request, Response } = OAuthServer
 
-module.exports = class OAuth {
+class OAuth {
   constructor (options = {}) {
     if (!options.model) {
       options.model = new Model()
@@ -71,14 +72,36 @@ module.exports = class OAuth {
     }
   }
 
-  authorize (options) {
+  authorize (options = {}) {
     return (req, res, next) => {
+      // check login
+      if (!req.session.currentUser) {
+        return res.redirect(`/account/login?redirect=${escape(req.originalUrl)}`)
+      }
+
+      if (req.method.toUpperCase() === 'GET') {
+        return this.model.getClient(req.query.client_id).then(client => {
+          res.render('authorize', {
+            client_name: client.name,
+            client_id: client.key,
+            scope: req.query.scope,
+            redirect_uri: req.query.redirect_uri,
+            response_type: req.query.response_type,
+          })
+        })
+      }
+
+      if (!options.authenticateHandler) {
+        options.authenticateHandler = {
+          handle: request => request.session.currentUser
+        }
+      }
+
       const request = new Request(req)
       const response = new Response(res)
 
       return this.server.authorize(request, response, options)
         .then(code => {
-          console.log(code)
           res.locals.oauth = { code: code }
           this.continueMiddleware && next()
         })
@@ -86,16 +109,19 @@ module.exports = class OAuth {
           return this.handleResponse(req, res, response)
         })
         .catch(e => {
-          console.log(e)
           return this.handleError(e, req, res, response, next)
         })
     }
   }
 
-  token (options) {
+  token (options = {}) {
     return (req, res, next) => {
       const request = new Request(req)
       const response = new Response(res)
+
+      if (!options.requireClientAuthentication) {
+        options.requireClientAuthentication = { password: false }
+      }
 
       return this.server.token(request, response, options)
         .then(token => {
@@ -111,3 +137,5 @@ module.exports = class OAuth {
     }
   }
 }
+
+module.exports = new OAuth()

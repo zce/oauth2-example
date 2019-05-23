@@ -9,7 +9,7 @@ const adapters = {
   memory: new Memory(),
   filesync: new FileSync('db.json')
 }
-const db = low(adapters.memory)
+const db = low(adapters.filesync)
 
 // extend
 db._.mixin(objectId)

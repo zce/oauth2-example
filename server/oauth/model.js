@@ -1,83 +1,90 @@
 // https://oauth2-server.readthedocs.io/en/latest/model/spec.html
 
-const { clients, authorizationCodes, accessTokens, refreshTokens, scopes, users } = require('../models')
+const { clients, authorizationCodes, accessTokens, refreshTokens, users } = require('../models')
 
 module.exports = class Model {
   constructor () { }
 
-  // generateAccessToken (client, user, scope, callback) { }
+  // generateAccessToken (client, user, scope) { }
 
-  // generateRefreshToken (client, user, scope, callback) { }
+  // generateRefreshToken (client, user, scope) { }
 
-  // generateAuthorizationCode (client, user, scope, callback) { }
+  // generateAuthorizationCode (client, user, scope) { }
 
-  getAccessToken (accessToken, callback) {
-    console.log('getAccessToken', arguments)
-
+  getAccessToken (accessToken) {
     const token = accessTokens.find({ token: accessToken }).value()
-    token.user = users.getById(token.user_id)
-    token.client = clients.getById(token.client_id)
-
-    callback(null, token)
+    if (!token) return Promise.resolve(null)
+    const client = clients.getById(token.client_id).value()
+    const user = users.getById(token.user_id).value()
+    return Promise.resolve({
+      accessToken: token.token,
+      accessTokenExpiresAt: new Date(token.expires),
+      scope: token.scope,
+      client: client,
+      user: user
+    })
   }
 
-  getRefreshToken (refreshToken, callback) {
-    console.log('getRefreshToken', arguments)
-
+  getRefreshToken (refreshToken) {
     const token = refreshTokens.find({ token: refreshToken }).value()
-    token.user = users.getById(token.user_id)
-    token.client = clients.getById(token.client_id)
-
-    callback(null, token)
+    if (!token) return Promise.resolve(null)
+    const client = clients.getById(token.client_id).value()
+    const user = users.getById(token.user_id).value()
+    return Promise.resolve({
+      refreshToken: token.token,
+      refreshTokenExpiresAt: new Date(token.expires),
+      scope: token.scope,
+      client: client,
+      user: user
+    })
   }
 
-  getAuthorizationCode (authorizationCode, callback) {
-    console.log('getAuthorizationCode', arguments)
-
+  getAuthorizationCode (authorizationCode) {
     const code = authorizationCodes.find({ code: authorizationCode }).value()
-    code.user = users.getById(code.user_id)
-    code.client = clients.getById(code.client_id)
-
-    callback(null, code)
+    if (!code) return Promise.resolve(null)
+    const client = clients.getById(code.client_id).value()
+    const user = users.getById(code.user_id).value()
+    return Promise.resolve({
+      code: code.code,
+      expiresAt: new Date(code.expires),
+      redirectUri: code.redirect,
+      scope: code.scope,
+      client: client,
+      user: user
+    })
   }
 
   // https://oauth2-server.readthedocs.io/en/latest/model/spec.html#getclient-clientid-clientsecret-callback
-  getClient (clientId, clientSecret, callback) {
-    console.log('getClient', arguments)
-
+  getClient (clientId, clientSecret) {
     const query = { key: clientId }
     if (clientSecret) {
       query.secret = clientSecret
     }
     const client = clients.find(query).value()
+    const user = users.getById(client.user_id).value()
 
-    callback(null, {
+    return Promise.resolve({
       id: client.id,
+      name: client.name,
       redirectUris: client.redirects,
-      grants: client.grants
+      grants: client.grants,
+      scope: client.scope,
+      user: user
     })
   }
 
-  getUser (username, password, callback) {
-    console.log('getUser', arguments)
-
+  getUser (username, password) {
     const user = users.find({ username, password }).value()
 
-    callback(null, user)
+    return Promise.resolve(user)
   }
 
-  getUserFromClient (client, callback) {
-    console.log('getUserFromClient', arguments)
-
-    const user = users.getById(client.user_id)
-
-    callback(null, user)
+  getUserFromClient (client) {
+    return Promise.resolve(client.user)
   }
 
-  saveToken (token, client, user, callback) {
-    console.log('saveToken', arguments)
-
-    accessTokens.push({
+  saveToken (token, client, user) {
+    accessTokens.insert({
       token: token.accessToken,
       expires: token.accessTokenExpiresAt,
       scope: token.scope,
@@ -85,7 +92,7 @@ module.exports = class Model {
       client_id: client.id
     }).write()
     if (token.refreshToken) {
-      refreshTokens.push({
+      refreshTokens.insert({
         token: token.refreshToken,
         expires: token.refreshTokenExpiresAt,
         scope: token.scope,
@@ -94,56 +101,65 @@ module.exports = class Model {
       }).write()
     }
 
-    callback(Object.assign(token, { client, user }))
+    return Promise.resolve(Object.assign(token, { client, user }))
   }
 
-  saveAuthorizationCode (code, client, user, callback) {
-    console.log('saveAuthorizationCode', arguments)
-
-    authorizationCodes.push({
+  saveAuthorizationCode (code, client, user) {
+    authorizationCodes.insert({
       code: code.authorizationCode,
       expires: code.expiresAt,
+      redirect: code.redirectUri,
       scope: code.scope,
       user_id: user.id,
       client_id: client.id
     }).write()
 
-    callback(null, {
-      authorization_code: code.authorizationCode,
-      expires_in: Math.floor((code.expiresAt - new Date()) / 1000)
+    return Promise.resolve({
+      authorizationCode: code.authorizationCode,
+      expiresAt: code.expiresAt
     })
   }
 
-  revokeToken (token, callback) {
-    console.log('revokeToken', arguments)
-
+  revokeToken (token) {
     refreshTokens.remove({ token: token.refreshToken }).write()
 
-    callback(null, true)
+    return Promise.resolve(true)
   }
 
-  revokeAuthorizationCode (code, callback) {
-    console.log('revokeAuthorizationCode', arguments)
-
+  revokeAuthorizationCode (code) {
     authorizationCodes.remove({ code: code.authorizationCode }).write()
 
-    callback(null, true)
+    return Promise.resolve(true)
   }
 
-  validateScope (user, client, scope, callback) {
-    console.log('validateScope', arguments)
+  validateScope (user, client, scope) {
+    // TODO: default scope
+    scope = scope || 'info'
 
-    if (!scope.split(' ').every(s => ['read', 'write'].indexOf(s) >= 0)) {
-      return false;
+    // TODO: all scopes
+    const requestedScopes = scope.split(/[,\s]/)
+
+    // client scope validate
+    if (client && client.scope !== '*') {
+      const clientScopes = client.scope.split(/[,\s]/)
+      if (!requestedScopes.every(s => clientScopes.indexOf(s) >= 0)) {
+        return false
+      }
     }
 
-    callback(null, scope)
-    // callback(null, user.scope === client.scope ? scope : false)
+    // user scope validate
+    console.log(user)
+    if (user && user.scope !== '*') {
+      const userScopes = user.scope.split(/[,\s]/)
+      if (!requestedScopes.every(s => userScopes.indexOf(s) >= 0)) {
+        return false
+      }
+    }
+
+    return Promise.resolve(requestedScopes.join(' '))
   }
 
-  verifyScope (accessToken, scope, callback) {
-    console.log('verifyScope', arguments)
-
+  verifyScope (accessToken, scope) {
     if (!accessToken.scope) {
       return false
     }
@@ -151,6 +167,6 @@ module.exports = class Model {
     const authorized = accessToken.scope.split(' ')
     const verified = requested.every(s => authorized.indexOf(s) >= 0)
 
-    callback(null, verified)
+    return Promise.resolve(verified)
   }
 }

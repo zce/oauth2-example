@@ -74,9 +74,13 @@ client_id: 1,
 
 ## References
 
+### oauth2orize
+
 https://github.com/FrankHassanabad/Oauth2orizeRecipes
 
 https://github.com/primo-malvado/calafrio
+https://github.com/at0g/oauth2-demo-server
+http://www.passportjs.org
 
 https://blog.csdn.net/shinepan/article/details/78851886
 https://github.com/YardStrong/express-oauth-demo

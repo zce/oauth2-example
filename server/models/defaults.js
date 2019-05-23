@@ -2,7 +2,7 @@ const objectId = require("bson-objectid")
 
 exports.clients = [
   {
-    id: objectId().str,
+    id: '5ce63c0a5a25992818e5347d',
     name: 'OAuth2 Client',
     website_url: 'https://github.com/zce/oauth2-example',
     privacy_url: 'https://github.com/zce/oauth2-example',
@@ -10,8 +10,8 @@ exports.clients = [
     secret: 'f657d916-0ad9-4b65-9976-3fe796bbdea0', // client_secret
     redirects: ['http://localhost:4000/login/callback'], // redirect_uris
     grants: ['authorization_code', 'password', 'refresh_token', 'client_credentials'],
-    scope: 'all',
-    user_id: 1
+    scope: '*',
+    user_id: '5ce63c0a5a25992818e5347e'
   }
 ]
 
@@ -22,8 +22,8 @@ exports.authorization_codes = [
     expires: new Date('2019-05-30 00:00'), // expires_at
     redirect: 'http://localhost:4000/login/callback', // redirect_uri
     scope: 'posts:read',
-    user_id: 1,
-    client_id: 1,
+    user_id: '5ce63c0a5a25992818e5347e',
+    client_id: '5ce63c0a5a25992818e5347d',
   }
 ]
 
@@ -33,8 +33,8 @@ exports.access_tokens = [
     token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94', // access_token
     expires: new Date('2019-05-30 00:00'), // expires_at
     scope: 'posts:read',
-    user_id: 1,
-    client_id: 1,
+    user_id: '5ce63c0a5a25992818e5347e',
+    client_id: '5ce63c0a5a25992818e5347d',
   }
 ]
 
@@ -44,8 +44,8 @@ exports.refresh_tokens = [
     token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2', // refresh_token
     expires: new Date('2019-05-30 00:00'), // expires_at
     scope: 'posts:read',
-    user_id: 1,
-    client_id: 1,
+    user_id: '5ce63c0a5a25992818e5347e',
+    client_id: '5ce63c0a5a25992818e5347d',
   }
 ]
 
@@ -74,7 +74,7 @@ exports.scopes = [
 
 exports.users = [
   {
-    id: objectId().str,
+    id: '5ce63c0a5a25992818e5347e',
     slug: 'admin',
     username: 'admin',
     password: 'wanglei',
@@ -82,10 +82,10 @@ exports.users = [
     email: 'admin@zce.me',
     mobile: '13266668888',
     status: 'activated',
-    scope: ''
+    scope: '*'
   },
   {
-    id: objectId().str,
+    id: '5ce63c0a5a25992818e5347f',
     slug: 'zce',
     username: 'zce',
     password: 'wanglei',
@@ -93,7 +93,7 @@ exports.users = [
     email: 'w@zce.me',
     mobile: '13266668888',
     status: 'activated',
-    scope: ''
+    scope: '*'
   }
 ]
 
