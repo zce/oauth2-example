@@ -34,7 +34,7 @@ html(lang='en')
       const btnLogin = document.querySelector('#btn_login')
       btnLogin.addEventListener('click', () => {
         const query = new URLSearchParams({
-          client_id: 'oauth2-example-client',
+          client_id: '#{oauth2.client_id}',
           redirect_uri: '#{oauth2.callback_uri}',
           response_type: 'code',
           scope: 'posts:read',
