@@ -1,0 +1,164 @@
+{
+  "clients": [
+    {
+      "id": "5ce63c0a5a25992818e5347d",
+      "name": "OAuth2 Client",
+      "website_url": "https://github.com/zce/oauth2-example",
+      "privacy_url": "https://github.com/zce/oauth2-example",
+      "key": "oauth2-example-client",
+      "secret": "f657d916-0ad9-4b65-9976-3fe796bbdea0",
+      "redirects": [
+        "http://localhost:4000/login/callback"
+      ],
+      "grants": [
+        "authorization_code",
+        "password",
+        "refresh_token",
+        "client_credentials"
+      ],
+      "scope": "*",
+      "user_id": "5ce63c0a5a25992818e5347e"
+    }
+  ],
+  "authorization_codes": [
+    {
+      "id": "5ce64106d91eb4220403b9d4",
+      "code": "4023348b5bc4",
+      "expires": "2019-05-29T16:00:00.000Z",
+      "redirect": "http://localhost:4000/login/callback",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    }
+  ],
+  "access_tokens": [
+    {
+      "id": "5ce64106d91eb4220403b9d5",
+      "token": "faee0258-b0a2-4d38-b12b-e0a9932a6b94",
+      "expires": "2019-05-29T16:00:00.000Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5ce6410ad91eb4220403b9dd",
+      "token": "7b230a365ce8c8e8313bfd8d060c6c2bb28766a3",
+      "expires": "2019-05-23T07:43:22.011Z",
+      "scope": "info",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5ce6411dd91eb4220403b9de",
+      "token": "8d7b9b7d9f46a291c97c2b620d6729cb1a3df66e",
+      "expires": "2019-05-23T07:43:41.286Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5ce64120d91eb4220403b9df",
+      "token": "f3f8c3eaa7ca28c28f38dc1c2c524f66d2b71c4f",
+      "expires": "2019-05-23T07:43:44.397Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5ce64121d91eb4220403b9e0",
+      "token": "4f4ff873d4257fb6f11f2741ed59bc67cadf8943",
+      "expires": "2019-05-23T07:43:45.240Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5ce64121d91eb4220403b9e1",
+      "token": "457be5154a58977080428eec6d84d8f7287cd988",
+      "expires": "2019-05-23T07:43:45.978Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5ce64122d91eb4220403b9e2",
+      "token": "3c05cb05f38aee06206680b6b02873cd74f84b1d",
+      "expires": "2019-05-23T07:43:46.710Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    }
+  ],
+  "refresh_tokens": [
+    {
+      "id": "5ce64106d91eb4220403b9d6",
+      "token": "cba19635-3bb4-47b1-87f6-8d0ff26b43f2",
+      "expires": "2019-05-29T16:00:00.000Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    }
+  ],
+  "scopes": [
+    {
+      "id": "5ce64106d91eb4220403b9d7",
+      "scope": "posts:read",
+      "default": true
+    },
+    {
+      "id": "5ce64106d91eb4220403b9d8",
+      "scope": "posts:create",
+      "default": false
+    },
+    {
+      "id": "5ce64106d91eb4220403b9d9",
+      "scope": "posts:delete",
+      "default": false
+    },
+    {
+      "id": "5ce64106d91eb4220403b9da",
+      "scope": "posts:update",
+      "default": false
+    }
+  ],
+  "users": [
+    {
+      "id": "5ce63c0a5a25992818e5347e",
+      "slug": "admin",
+      "username": "admin",
+      "password": "wanglei",
+      "nickname": "Administrator",
+      "email": "admin@zce.me",
+      "mobile": "13266668888",
+      "status": "activated",
+      "scope": "*"
+    },
+    {
+      "id": "5ce63c0a5a25992818e5347f",
+      "slug": "zce",
+      "username": "zce",
+      "password": "wanglei",
+      "nickname": "Wang Lei",
+      "email": "w@zce.me",
+      "mobile": "13266668888",
+      "status": "activated",
+      "scope": "*"
+    }
+  ],
+  "posts": [
+    {
+      "id": "5ce64106d91eb4220403b9db",
+      "slug": "hello-world",
+      "title": "Hello world",
+      "excerpt": "欢迎使用WordPress。这是您的第一篇文章。编辑或删除它，然后开始写作吧！",
+      "content": "<p>欢迎使用WordPress。这是您的第一篇文章。编辑或删除它，然后开始写作吧！</p>"
+    },
+    {
+      "id": "5ce64106d91eb4220403b9dc",
+      "slug": "welcome-to-ghost",
+      "title": "Welcome to Ghost",
+      "excerpt": "👋 Welcome, it's great to have you here.",
+      "content": "<p>👋 Welcome, it's great to have you here.</p>"
+    }
+  ]
+}
