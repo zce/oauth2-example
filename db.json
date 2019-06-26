@@ -29,6 +29,15 @@
       "scope": "posts:read",
       "user_id": "5ce63c0a5a25992818e5347e",
       "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5d133397417e7fd42e147ed8",
+      "code": "ab0a11f05d7388e9d6530c980c9813212be68a82",
+      "expires": "2019-06-26T09:02:59.325Z",
+      "redirect": "http://localhost:4000/login/callback",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347f",
+      "client_id": "5ce63c0a5a25992818e5347d"
     }
   ],
   "access_tokens": [
@@ -87,6 +96,14 @@
       "scope": "posts:read",
       "user_id": "5ce63c0a5a25992818e5347e",
       "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5d133397417e7fd42e147ed9",
+      "token": "8a47dd161ebd04c0eb5f272c20f79fd504e30dfb",
+      "expires": "2019-06-26T09:57:59.361Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347f",
+      "client_id": "5ce63c0a5a25992818e5347d"
     }
   ],
   "refresh_tokens": [
@@ -96,6 +113,14 @@
       "expires": "2019-05-29T16:00:00.000Z",
       "scope": "posts:read",
       "user_id": "5ce63c0a5a25992818e5347e",
+      "client_id": "5ce63c0a5a25992818e5347d"
+    },
+    {
+      "id": "5d133397417e7fd42e147eda",
+      "token": "bd36b061202295e8ef9bfcfdf89c098213cf33d0",
+      "expires": "2019-07-10T08:57:59.362Z",
+      "scope": "posts:read",
+      "user_id": "5ce63c0a5a25992818e5347f",
       "client_id": "5ce63c0a5a25992818e5347d"
     }
   ],

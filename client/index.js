@@ -51,7 +51,7 @@ app.get('/login/callback', (req, res) => {
 })
 
 if (!module.parent) {
-  app.listen(4000, () => console.log('> http://localhost:4000'))
+  app.listen(4000, () => console.log('> Client: http://localhost:4000'))
 }
 
 module.exports = app
