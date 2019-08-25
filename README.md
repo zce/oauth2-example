@@ -1,63 +1,95 @@
+# oauth2-example
+
+> oauth2-server example
+
+## Usage
+
+TODO: Usage...
+
 ## Models
 
 ### User
 
-id: objectId().str,
-slug: 'admin',
-username: 'admin',
-password: 'wanglei',
-nickname: 'Administrator',
-email: 'admin@zce.me',
-mobile: '13266668888',
-status: 'activated',
-scope: ''
+```js
+{
+  id: objectId().str,
+  slug: 'admin',
+  username: 'admin',
+  password: 'wanglei',
+  nickname: 'Administrator',
+  email: 'admin@zce.me',
+  mobile: '13266668888',
+  status: 'activated',
+  scope: ''
+}
+```
 
 ### Scope
 
-id: objectId().str,
-scope: 'posts:update',
-default: false
+```js
+{
+  id: objectId().str,
+  scope: 'posts:update',
+  default: false
+}
+```
 
 ### Client
 
-id: objectId().str,
-name: 'OAuth2 Client',
-website_url: 'https://github.com/zce/oauth2-example',
-privacy_url: 'https://github.com/zce/oauth2-example',
-key: 'oauth2-client', // client_id
-secret: 'f657d916-0ad9-4b65-9976-3fe796bbdea0', // client_secret
-redirects: ['http://localhost:4000/login/callback'], // redirect_uris
-grants: ['authorization_code', 'password', 'refresh_token', 'client_credentials'],
-scope: 'all',
-user_id: 1
+```js
+{
+  id: objectId().str,
+  name: 'OAuth2 Client',
+  website_url: 'https://github.com/zce/oauth2-example',
+  privacy_url: 'https://github.com/zce/oauth2-example',
+  key: 'oauth2-client', // client_id
+  secret: 'f657d916-0ad9-4b65-9976-3fe796bbdea0', // client_secret
+  redirects: ['http://localhost:4000/login/callback'], // redirect_uris
+  grants: ['authorization_code', 'password', 'refresh_token', 'client_credentials'],
+  scope: 'all',
+  user_id: 1
+}
+```
 
 ### AccessToken
 
-id: objectId().str,
-token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94', // access_token
-expires: new Date('2019-05-30 00:00'), // expires_at
-scope: 'posts:read',
-user_id: 1,
-client_id: 1,
+```js
+{
+  id: objectId().str,
+  token: 'faee0258-b0a2-4d38-b12b-e0a9932a6b94', // access_token
+  expires: new Date('2019-05-30 00:00'), // expires_at
+  scope: 'posts:read',
+  user_id: 1,
+  client_id: 1
+}
+```
 
 ### RefreshToken
 
-id: objectId().str,
-token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2', // refresh_token
-expires: new Date('2019-05-30 00:00'), // expires_at
-scope: 'posts:read',
-user_id: 1,
-client_id: 1,
+```js
+{
+  id: objectId().str,
+  token: 'cba19635-3bb4-47b1-87f6-8d0ff26b43f2', // refresh_token
+  expires: new Date('2019-05-30 00:00'), // expires_at
+  scope: 'posts:read',
+  user_id: 1,
+  client_id: 1
+}
+```
 
 ### AuthorizationCode
 
-id: objectId().str,
-code: '4023348b5bc4', // authorization_code
-expires: new Date('2019-05-30 00:00'), // expires_at
-redirect: 'http://localhost:4000/login/callback', // redirect_uri
-scope: 'posts:read',
-user_id: 1,
-client_id: 1,
+```js
+{
+  id: objectId().str,
+  code: '4023348b5bc4', // authorization_code
+  expires: new Date('2019-05-30 00:00'), // expires_at
+  redirect: 'http://localhost:4000/login/callback', // redirect_uri
+  scope: 'posts:read',
+  user_id: 1,
+  client_id: 1
+}
+```
 
 ## Grant Types
 
@@ -67,41 +99,31 @@ client_id: 1,
 授权站点：AuthApp
 
 1. 用户在 FooApp 上点击 AuthApp 授权登录链接，例如：
-  - http://localhost:3000/oauth/authorize?client_id=oauth2-example-client&redirect_uri=http://localhost:4000/login/callback&response_type=code&scope=posts:read
+   http://localhost:3000/oauth/authorize?client_id=oauth2-example-client&redirect_uri=http://localhost:4000/login/callback&response_type=code&scope=posts:read
+
 2. 用户进入 AuthApp 页面进行授权，如果当前用户还没有在 AuthApp 登录，则需要先跳转到 AuthApp 登录
-  - http://localhost:3000/account/login?redirect=%2Foauth%2Fauthorize%3Fclient_id%3Doauth2-example-client%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A4000%2Flogin%2Fcallback%26response_type%3Dcode%26scope%3Dposts%3Aread
+   http://localhost:3000/account/login?redirect=%2Foauth%2Fauthorize%3Fclient_id%3Doauth2-example-client%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A4000%2Flogin%2Fcallback%26response_type%3Dcode%26scope%3Dposts%3Aread
 
-
+<!--
 ## References
 
 ### oauth2orize
 
 https://github.com/FrankHassanabad/Oauth2orizeRecipes
-
 https://github.com/primo-malvado/calafrio
 https://github.com/at0g/oauth2-demo-server
 http://www.passportjs.org
-
 https://blog.csdn.net/shinepan/article/details/78851886
 https://github.com/YardStrong/express-oauth-demo
-
 https://www.jianshu.com/p/7febbe553c83
 https://github.com/RobottDog/DCOS-Auth
-
 https://github.com/syntithenai/react-express-oauth-login-system
-
 https://github.com/manjeshpv/node-oauth2-server-implementation
-
 https://github.com/oauth-xx/oauth2
-
 https://tools.ietf.org/html/rfc6749
-
 https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/
-
 https://github.com/greenspanx/node_oauth2_rest_api/blob/master/server.js
-
 https://github.com/zhanghengxin/test-oauth2/blob/master/oauth-model/model.js
-
 https://github.com/slavab89/oauth2-server-example-mongodb
 
 请求授权
@@ -153,3 +175,4 @@ POST /authorize
 GET /callback
   code: 7c91849181a5cc05d777
   state: 7947e14af4fd2607a8d47072a91fc5ffeea414aad803eb9f
+-->
