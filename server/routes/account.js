@@ -40,7 +40,7 @@ router.post('/login', (req, res) => {
     return res.render('login')
   }
   // 密码校验
-  if (user.password !== password){
+  if (user.password !== password) {
     res.locals.error = 'Password error!'
     return res.render('login')
   }

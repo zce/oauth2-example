@@ -3,7 +3,7 @@
 const { clients, authorizationCodes, accessTokens, refreshTokens, users } = require('../models')
 
 module.exports = class Model {
-  constructor () { }
+  // constructor () { }
 
   // generateAccessToken (client, user, scope) { }
 

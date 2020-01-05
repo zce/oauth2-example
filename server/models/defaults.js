@@ -1,4 +1,4 @@
-const objectId = require("bson-objectid")
+const objectId = require('bson-objectid')
 
 exports.clients = [
   {
@@ -23,7 +23,7 @@ exports.authorization_codes = [
     redirect: 'http://localhost:4000/login/callback', // redirect_uri
     scope: 'posts:read',
     user_id: '5ce63c0a5a25992818e5347e',
-    client_id: '5ce63c0a5a25992818e5347d',
+    client_id: '5ce63c0a5a25992818e5347d'
   }
 ]
 
@@ -34,7 +34,7 @@ exports.access_tokens = [
     expires: new Date('2019-05-30 00:00'), // expires_at
     scope: 'posts:read',
     user_id: '5ce63c0a5a25992818e5347e',
-    client_id: '5ce63c0a5a25992818e5347d',
+    client_id: '5ce63c0a5a25992818e5347d'
   }
 ]
 
@@ -45,7 +45,7 @@ exports.refresh_tokens = [
     expires: new Date('2019-05-30 00:00'), // expires_at
     scope: 'posts:read',
     user_id: '5ce63c0a5a25992818e5347e',
-    client_id: '5ce63c0a5a25992818e5347d',
+    client_id: '5ce63c0a5a25992818e5347d'
   }
 ]
 

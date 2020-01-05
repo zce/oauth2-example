@@ -86,7 +86,7 @@ class OAuth {
             client_id: client.key,
             scope: req.query.scope,
             redirect_uri: req.query.redirect_uri,
-            response_type: req.query.response_type,
+            response_type: req.query.response_type
           })
         })
       }

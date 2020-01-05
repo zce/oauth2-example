@@ -1,6 +1,6 @@
 // https://github.com/typicode/lodash-id/blob/master/src/index.js
 
-const objectId = require("bson-objectid")
+const objectId = require('bson-objectid')
 
 module.exports = {
   __id () {

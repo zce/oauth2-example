@@ -8,20 +8,20 @@ html(lang='en')
     link(rel='stylesheet', href='https://unpkg.com/milligram')
     style.
       .site-header {
-      padding-top: 2.0rem;
-      border-bottom: 1px solid #eee;
+        padding-top: 2.0rem;
+        border-bottom: 1px solid #eee;
       }
       .site-main > section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      max-width: 480px;
-      height: 75vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 480px;
+        height: 75vh;
       }
       .site-footer {
-      padding: 2.5rem 0;
-      border-top: 1px solid #eee;
+        padding: 2.5rem 0;
+        border-top: 1px solid #eee;
       }
   body
     header.site-header
@@ -29,7 +29,8 @@ html(lang='en')
         h1 OAuth2 Client
     main.site-main
       section.container
-        a#btn_login.button(href='javascript:;') OAuth2 Login
+        button#btn_login OAuth2 Login
+        p grant_type: authorization_code
     script.
       const btnLogin = document.querySelector('#btn_login')
       btnLogin.addEventListener('click', () => {

@@ -4,7 +4,15 @@
 
 ## Usage
 
-TODO: Usage...
+```shell
+# install dependencies
+$ yarn # or npm i
+```
+
+> Client: http://localhost:4000
+> Server: http://localhost:3000
+
+Visit client
 
 ## Models
 

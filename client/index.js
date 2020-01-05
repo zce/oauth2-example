@@ -37,7 +37,7 @@ app.get('/login/callback', (req, res) => {
     client_id: config.oauth2Provider.client_id,
     client_secret: config.oauth2Provider.client_secret,
     grant_type: 'authorization_code',
-    redirect_uri:  config.oauth2Provider.callback_uri,
+    redirect_uri: config.oauth2Provider.callback_uri,
     code: code
   })
 
