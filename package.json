@@ -32,7 +32,7 @@
     "http-errors": "^1.7.3",
     "lowdb": "^1.0.0",
     "oauth2-server": "^3.0.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "youch": "^2.0.10"
   },
   "devDependencies": {
