@@ -7,8 +7,8 @@ head
   link(href='/css/bootstrap.css', rel='stylesheet')
   // Custom styles for this template
   link(href='/css/login.css', rel='stylesheet')
-form.form-authorize(method='post')
-  img.d-block.mb-5.mx-auto(src='https://img.zce.me/logo.svg', alt='zce.me', width='120', height='120')
+form.form-authorize.d-grid(method='post')
+  img.d-block.mb-5.mx-auto(src='https://img.zce.me/logo/zce.svg', alt='zce.me', width='120', height='120')
   h1.h3.mb-3.font-weight-light Authorized to 「#{client_name}」
   ul.text-warning
     li= scope

@@ -7,15 +7,15 @@ head
   link(href='/css/bootstrap.css', rel='stylesheet')
   // Custom styles for this template
   link(href='/css/login.css', rel='stylesheet')
-form.form-login(method='post', autocomplete='off')
-  img.d-block.mb-5.mx-auto(src='https://img.zce.me/logo.svg', alt='zce.me', width='120', height='120')
+form.form-login.d-grid(method='post', autocomplete='off')
+  img.d-block.mb-5.mx-auto(src='https://img.zce.me/logo/zce.svg', alt='zce.me', width='120', height='120')
   h1.h3.mb-3.font-weight-light Please sign in
-  label.sr-only(for='input_username') Username
+  label.visually-hidden(for='input_username') Username
   input#input_username.form-control(type='text', name='username', value= model.username, placeholder='Username', required, autofocus)
-  label.sr-only(for='input_password') Password
+  label.visually-hidden(for='input_password') Password
   input#input_password.form-control(type='password', name='password', value= model.password, placeholder='Password', required)
-  label.checkbox.mb-4
-    input(type='checkbox', name='remember', value='true')
+  label.form-check.mb-4
+    input.form-check-input(type='checkbox', name='remember', value='true')
     |  Remember me
   if error
     p.text-danger ⌽ #{error}
