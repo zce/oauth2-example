@@ -38,7 +38,7 @@
     "lowdb": "^1.0.0",
     "oauth2-server": "^3.1.1",
     "pug": "^2.0.4",
-    "youch": "^2.2.2"
+    "youch": "^3.0.0"
   },
   "devDependencies": {
     "node-dev": "7.0.0",
